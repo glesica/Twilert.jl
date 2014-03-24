@@ -25,9 +25,18 @@ end
 
 # Helper functions
 
+function authheader(creds::Credentials)
+    sid = creds.sid
+    token = creds.token
+    encoded = base64("$sid:$token")
+
+    value = "Basic $encoded"
+
+    return ("Authorization", value)
+end
+
 function sendmsg(msg::Message)
     sid = msg.creds.sid
-    token = msg.creds.token
 
     body = msg.body
     to = msg.to
@@ -35,7 +44,8 @@ function sendmsg(msg::Message)
 
     url = "$TWILIO_BASE/Accounts/$sid/Messages"
     data = [("Body", body), ("To", to), ("From", from)]
-    req = HTTPC.RequestOptions(query_params=params)
+    headers = [authheader(msg.creds)]
+    req = HTTPC.RequestOptions(headers=headers)
 
     resp = HTTPC.post(url, data, req)
 
