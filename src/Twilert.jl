@@ -49,7 +49,7 @@ function sendmsg(msg::Message)
 
     resp = HTTPC.post(url, data, req)
 
-    if resp.status_code == 200
+    if resp.http_code == 201
         return :ok
     else
         return :error
