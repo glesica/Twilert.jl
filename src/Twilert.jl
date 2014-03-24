@@ -57,6 +57,7 @@ function sendmsg(msg::Message)
 end
 
 function loadcfg()
+    cfgfile = Nothing
     try
         cfgfile = open(".twilertrc", "r")
     catch
