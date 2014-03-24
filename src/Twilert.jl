@@ -103,8 +103,8 @@ end
 
 function alert(body::String, to::String)
     cfg = loadcfg()
-    if ! "from" in keys(cfg)
-        error("No from key in config")
+    if ! ("from" in keys(cfg))
+        error("No 'from' key in config")
     end
     from = cfg["from"]
     alert(body, to, from)
@@ -112,8 +112,8 @@ end
 
 function alert(body::String)
     cfg = loadcfg()
-    if ! "to" in keys(cfg)
-        error("No to key in config")
+    if ! ("to" in keys(cfg))
+        error("No 'to' key in config")
     end
     to = cfg["to"]
     alert(body, to)
