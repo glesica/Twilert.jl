@@ -107,3 +107,5 @@ function alert(body::String)
     to = cfg["to"]
     alert(body, to)
 end
+
+end
