@@ -93,12 +93,14 @@ function alert(body::String, to::String, from::String, creds::Credentials)
 
     msg = Message(body, to, from, creds)
     result = sendmsg(msg)
+
+    return result
 end
 
 function alert(body::String, to::String, from::String)
     cfg = loadcfg()
     creds = Credentials(cfg["sid"], cfg["token"])
-    alert(body, to, from, creds)
+    return alert(body, to, from, creds)
 end
 
 function alert(body::String, to::String)
@@ -107,7 +109,7 @@ function alert(body::String, to::String)
         error("No 'from' key in config")
     end
     from = cfg["from"]
-    alert(body, to, from)
+    return alert(body, to, from)
 end
 
 function alert(body::String)
@@ -116,7 +118,7 @@ function alert(body::String)
         error("No 'to' key in config")
     end
     to = cfg["to"]
-    alert(body, to)
+    return alert(body, to)
 end
 
 end
